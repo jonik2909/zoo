@@ -1,6 +1,5 @@
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Controller, Get, Param, Query, Req, Res } from '@nestjs/common';
 import { DogService } from './dog.service';
-import { Request, Response } from 'express';
 
 @Controller('dog')
 export class DogController {
@@ -12,9 +11,9 @@ export class DogController {
   }
 
   @Get('greet/:id')
-  public greet(@Req() request: Request, @Res() response: Response): string {
-    console.log('params: ', request.params);
-    console.log('query: ', request.query);
+  public greet(@Param() params: any, @Query() query: any): string {
+    console.log('params: ', params);
+    console.log('query: ', query);
     return this.dogService.greet();
   }
 }
